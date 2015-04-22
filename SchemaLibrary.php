@@ -93,64 +93,11 @@ class SchemaLibrary {
       }
     }
   }
-  // public static function afcLoadValue($value, $post_id, $field) {
-  //   // echo "\n----------------\n";
-  //   // echo "VALUE\n";
-  //   // var_dump( $value );
-  //   // echo "POST ID\n";
-  //   // var_dump( $post_id );
-  //   // echo "FIELD\n";
-  //   // var_dump( $field["key"] );
-  //   // echo "\n----------------\n";
-  // }
-  // public static function afcLoadSchemaVersionsValue($value, $post_id, $field) {
-  //   //echo "<pre>LOADING VALUE \n";
-  //   // var_dump( $value );
-  //   if ($value === false) {
-  //     echo "SETTING VALUE\n";
-  //     // this is a new post since value === false
-  //     // set value to number of default # of rows to create
-  //     $versions = AdminOptions::getSchemaData();
-  //     //var_dump($versions);
-  //     $value = $versions[ $post_id ];
-  //     // add_filter('acf/load_value/name=version', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadValue', 10);
-  //     // add_filter('acf/load_value/name=schema_json', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadSchemaJson', 10);
-  //     // add_filter('acf/load_value/name=visibility', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadVisibility', 10);
-  //   }
-  //    // echo("NEW FIELD VALUE");
-  //    // var_dump( $value );
-  //   // echo("NEW FIELD POST ID");
-  //   // var_dump( $post_id );
-  //   // echo("-----------------");
-  //    //echo "</pre>";
-  //   return $value;
-  // }
-
-  // public static function acfLoadVersion($value, $post_id, $field) {
-  //   echo( 'acfLoadVersion' );
-  //   var_dump( $field );
-  //   //$value = self::$schemaVersions[ $post_id ]
-  //   return $value;
-  // }
-  // public static function acfLoadSchemaJson($value, $post_id, $field) {
-  //   echo( 'acfLoadSchemaJson' );
-  //   var_dump( $field );
-  //   //$value = self::$schemaVersions[ $post_id ]
-  //   return $value;
-  // }
-  // public static function acfLoadVisibility($value, $post_id, $field) {
-  //   echo( 'acfLoadVisibility' );
-  //   var_dump( $field );
-  //   //$value = self::$schemaVersions[ $post_id ]
-  //   return $value;
-  // }
 
   public function init(){
     add_action('init', 'OMHSchemaLibrary\\SchemaLibrary::registerSchemas');
     add_action('init', 'OMHSchemaLibrary\\SchemaLibrary::createSchemaTypeTaxonomy');
     add_action('restrict_manage_posts', 'OMHSchemaLibrary\\SchemaLibrary::addSchemaTaxonomyFilters');
-    // add_filter('acf/load_value/name=schema_versions', 'OMHSchemaLibrary\\SchemaLibrary::afcLoadSchemaVersionsValue', 10, 3);
-    // add_filter('acf/load_value', 'OMHSchemaLibrary\\SchemaLibrary::afcLoadValue', 10, 3);
     self::$schemaVersions = array();
   }
 
@@ -251,15 +198,7 @@ class SchemaLibrary {
 
       echo "<pre>";
 
-    //echo "<pre>";
     foreach( self::$schemaVersions as $post_id => $new_versions_for_post ){
-
-      echo "UPDATING POST: " . $post_id . "\n";
-
-      //$field_obj = get_field_object( 'schema_versions', $post_id );
-
-      //echo "FIELD OBJECT for schema_versions\n";
-      //var_dump( $field_obj );
 
       $field_key = $this->acf_get_field_key('schema_versions', $post_id );
       update_field( $field_key, $new_versions_for_post, $post_id );
@@ -280,25 +219,14 @@ class SchemaLibrary {
       //     }
       //   }
       // }
-      //$this->updateRepeaterRow( 'schema_versions', $new_versions_for_post, $post_id );
-      //$field_obj = get_field_object( 'schema_versions', $post_id );
-      // echo "OBJ \n";
-      // var_dump( $field_obj );
-      // echo "</pre>";
 
-      //echo "</pre>";
       //echo $post_id . " existing\n";
       //var_dump( get_field( 'schema_versions', $post_id ) );
       //echo "\n";
     }
 
-    //echo "SIZE: " . strlen( serialize( self::$schemaVersions ) );
 
-      echo "</pre>";
-
-    // AdminOptions::saveSchemaData( self::$schemaVersions );
-    // echo 'SAVED DATA COUNT:' . count( AdminOptions::getSchemaData() );
-
+    echo "</pre>";
 
     return $update_output;
 
