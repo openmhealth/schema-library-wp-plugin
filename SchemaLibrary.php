@@ -93,64 +93,64 @@ class SchemaLibrary {
       }
     }
   }
-  public static function afcLoadValue($value, $post_id, $field) {
-    // echo "\n----------------\n";
-    // echo "VALUE\n";
-    // var_dump( $value );
-    // echo "POST ID\n";
-    // var_dump( $post_id );
-    // echo "FIELD\n";
-    // var_dump( $field["key"] );
-    // echo "\n----------------\n";
-  }
-  public static function afcLoadSchemaVersionsValue($value, $post_id, $field) {
-    //echo "<pre>LOADING VALUE \n";
-    // var_dump( $value );
-    if ($value === false) {
-      echo "SETTING VALUE\n";
-      // this is a new post since value === false
-      // set value to number of default # of rows to create
-      $versions = AdminOptions::getSchemaData();
-      //var_dump($versions);
-      $value = $versions[ $post_id ];
-      // add_filter('acf/load_value/name=version', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadValue', 10);
-      // add_filter('acf/load_value/name=schema_json', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadSchemaJson', 10);
-      // add_filter('acf/load_value/name=visibility', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadVisibility', 10);
-    }
-     // echo("NEW FIELD VALUE");
-     // var_dump( $value );
-    // echo("NEW FIELD POST ID");
-    // var_dump( $post_id );
-    // echo("-----------------");
-     //echo "</pre>";
-    return $value;
-  }
+  // public static function afcLoadValue($value, $post_id, $field) {
+  //   // echo "\n----------------\n";
+  //   // echo "VALUE\n";
+  //   // var_dump( $value );
+  //   // echo "POST ID\n";
+  //   // var_dump( $post_id );
+  //   // echo "FIELD\n";
+  //   // var_dump( $field["key"] );
+  //   // echo "\n----------------\n";
+  // }
+  // public static function afcLoadSchemaVersionsValue($value, $post_id, $field) {
+  //   //echo "<pre>LOADING VALUE \n";
+  //   // var_dump( $value );
+  //   if ($value === false) {
+  //     echo "SETTING VALUE\n";
+  //     // this is a new post since value === false
+  //     // set value to number of default # of rows to create
+  //     $versions = AdminOptions::getSchemaData();
+  //     //var_dump($versions);
+  //     $value = $versions[ $post_id ];
+  //     // add_filter('acf/load_value/name=version', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadValue', 10);
+  //     // add_filter('acf/load_value/name=schema_json', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadSchemaJson', 10);
+  //     // add_filter('acf/load_value/name=visibility', 'OMHSchemaLibrary\\SchemaLibrary::acfLoadVisibility', 10);
+  //   }
+  //    // echo("NEW FIELD VALUE");
+  //    // var_dump( $value );
+  //   // echo("NEW FIELD POST ID");
+  //   // var_dump( $post_id );
+  //   // echo("-----------------");
+  //    //echo "</pre>";
+  //   return $value;
+  // }
 
-  public static function acfLoadVersion($value, $post_id, $field) {
-    echo( 'acfLoadVersion' );
-    var_dump( $field );
-    //$value = self::$schemaVersions[ $post_id ]
-    return $value;
-  }
-  public static function acfLoadSchemaJson($value, $post_id, $field) {
-    echo( 'acfLoadSchemaJson' );
-    var_dump( $field );
-    //$value = self::$schemaVersions[ $post_id ]
-    return $value;
-  }
-  public static function acfLoadVisibility($value, $post_id, $field) {
-    echo( 'acfLoadVisibility' );
-    var_dump( $field );
-    //$value = self::$schemaVersions[ $post_id ]
-    return $value;
-  }
+  // public static function acfLoadVersion($value, $post_id, $field) {
+  //   echo( 'acfLoadVersion' );
+  //   var_dump( $field );
+  //   //$value = self::$schemaVersions[ $post_id ]
+  //   return $value;
+  // }
+  // public static function acfLoadSchemaJson($value, $post_id, $field) {
+  //   echo( 'acfLoadSchemaJson' );
+  //   var_dump( $field );
+  //   //$value = self::$schemaVersions[ $post_id ]
+  //   return $value;
+  // }
+  // public static function acfLoadVisibility($value, $post_id, $field) {
+  //   echo( 'acfLoadVisibility' );
+  //   var_dump( $field );
+  //   //$value = self::$schemaVersions[ $post_id ]
+  //   return $value;
+  // }
 
   public function init(){
     add_action('init', 'OMHSchemaLibrary\\SchemaLibrary::registerSchemas');
     add_action('init', 'OMHSchemaLibrary\\SchemaLibrary::createSchemaTypeTaxonomy');
     add_action('restrict_manage_posts', 'OMHSchemaLibrary\\SchemaLibrary::addSchemaTaxonomyFilters');
-    add_filter('acf/load_value/name=schema_versions', 'OMHSchemaLibrary\\SchemaLibrary::afcLoadSchemaVersionsValue', 10, 3);
-    add_filter('acf/load_value', 'OMHSchemaLibrary\\SchemaLibrary::afcLoadValue', 10, 3);
+    // add_filter('acf/load_value/name=schema_versions', 'OMHSchemaLibrary\\SchemaLibrary::afcLoadSchemaVersionsValue', 10, 3);
+    // add_filter('acf/load_value', 'OMHSchemaLibrary\\SchemaLibrary::afcLoadValue', 10, 3);
     self::$schemaVersions = array();
   }
 
@@ -254,8 +254,16 @@ class SchemaLibrary {
     //echo "<pre>";
     foreach( self::$schemaVersions as $post_id => $new_versions_for_post ){
 
-      //update_field( 'schema_versions', $new_versions_for_post, $post_id );
+      echo "UPDATING POST: " . $post_id . "\n";
 
+      //$field_obj = get_field_object( 'schema_versions', $post_id );
+
+      //echo "FIELD OBJECT for schema_versions\n";
+      //var_dump( $field_obj );
+
+      $field_key = $this->acf_get_field_key('schema_versions', $post_id );
+      update_field( $field_key, $new_versions_for_post, $post_id );
+      //break;
       //$existing_versions = get_field( 'schema_versions', $post_id );
 
       //echo "<pre>\n $post_id \n";
@@ -288,37 +296,33 @@ class SchemaLibrary {
 
       echo "</pre>";
 
-    AdminOptions::saveSchemaData( self::$schemaVersions );
-    echo 'SAVED DATA COUNT:' . count( AdminOptions::getSchemaData() );
+    // AdminOptions::saveSchemaData( self::$schemaVersions );
+    // echo 'SAVED DATA COUNT:' . count( AdminOptions::getSchemaData() );
 
 
     return $update_output;
 
   }
 
-  private function updateRepeaterRow( $field_name, $values, $post_id ) {
-    echo "GETTING OBJ ";
+  /** 
+   * Get field key for field name. ACF 4
+   * Will return first matched acf field key for a give field name.
+   * 
+   * This function will return the field_key of a certain field.
+   * 
+   * @param $field_name String ACF Field name
+   * @param $post_id int The post id to check.
+   * @return 
+   */
+  private function acf_get_field_key( $field_name, $post_id ) {
 
-    $field_obj = get_field_object( $field_name, $post_id );
+    global $wpdb;
 
-    //echo "FIELD OBJECT for $field_name\n";
-    //var_dump( $field_obj );
+    $posts = $wpdb->get_results( $wpdb->prepare( "SELECT ID FROM $wpdb->posts where post_type=%s", 'acf' ) );
+    $rows = $wpdb->get_results( $wpdb->prepare("SELECT meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key LIKE %s AND meta_value LIKE %s", $posts[0]->ID, 'field_%', '%versions%'), ARRAY_A);
+    $field_data = unserialize( $rows[0]["meta_value"] );//not sure why it is in there twice...
 
-    $field_key = $field_obj["key"];
-    echo "OBJ " . $field_key . "\n";
-    var_dump( $field_obj );
-
-    if( $field_obj['value'] ){
-      update_field( $field_name, $values, $post_id );
-      echo "NEW VALUE:";
-      var_dump($field_obj['value']);
-    }else{
-      $field_values = get_field( $field_key, $post_id );
-      echo "FIELD VALUES for " . $field_key . "\n";
-      var_dump( $values );
-      $field_values = $values;
-      update_field( $field_key, $field_values, $post_id );
-    }
+    return $field_data['key'];
 
   }
 
