@@ -4,7 +4,8 @@ class AdminOptions {
 
   private $options = array(
     'git_repository' => '',
-    'git_repository_base_dir' => '',
+    'base_dir' => '',
+    'sample_data_dir' => '',
     'git_branch' => '',
     'schema_host_url' => '',
     'git_enabled' => false,

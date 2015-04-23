@@ -51,13 +51,26 @@
 
       <tr>
         <th scope="row">
-          <label for="git_repository_base_dir">Base directory</label><br/>
+          <label for="base_dir">Base directory</label><br/>
         </th>
         <td>
-          /<input type="text" class="regular-text" id="git_repository_base_dir" name="git_repository_base_dir" value="<?php echo $data['options']['git_repository_base_dir']; ?>">
+          /<input type="text" class="regular-text" id="base_dir" name="base_dir" value="<?php echo $data['options']['base_dir']; ?>">
           <p class="description">
             Enter the directory inside the repository where the schemas are stored<br/>
             Leave off any leading or trailing slashes, e.g. "schema"
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <th scope="row">
+          <label for="sample_data_dir">Sample data directory</label><br/>
+        </th>
+        <td>
+          /<input type="text" class="regular-text" id="sample_data_dir" name="sample_data_dir" value="<?php echo $data['options']['sample_data_dir']; ?>">
+          <p class="description">
+            Enter the directory inside the repository where the sample data is stored<br/>
+            Leave off any leading or trailing slashes, e.g. "sampleData"
           </p>
         </td>
       </tr>
