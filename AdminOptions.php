@@ -29,10 +29,11 @@ class AdminOptions {
   public function load(){
 
     $omh_options = get_option( $this->pluginOptionKey );
-
-    foreach( $this->options as $name => $value){
-      if ( array_key_exists( $name, $omh_options )){
-        $this->options[ $name ] = $omh_options[ $name ];
+    if ( $omh_options ) {
+      foreach( $this->options as $name => $value){
+        if ( array_key_exists( $name, $omh_options )){
+          $this->options[ $name ] = $omh_options[ $name ];
+        }
       }
     }
 

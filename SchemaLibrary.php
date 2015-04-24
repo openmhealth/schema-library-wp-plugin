@@ -201,7 +201,7 @@ class SchemaLibrary {
                 $this->addSchemaData( $post_id, 'schema_versions', array(
                     'version' => $version_name,
                     'schema_json' => $file_content,
-                    'visibility' => '', //change this based on whether it is there already
+                    'visibility' => 'visible',
                 ));
 
                 $post_url = get_permalink( $post_id );
@@ -232,18 +232,26 @@ class SchemaLibrary {
 
                 preg_match( "/\/([^\/]+)\/(?:(\d(?:\.\d+)+)\/)?shouldPass\/(.+)\.json/", $name, $matches );
 
-                if ($matches){
+                if ( $matches ){
 
                     $schema_name = $matches[1];
                     $version_name = $matches[2];
                     $sample_data_title = ucwords( preg_replace("/-/", " ", $matches[3]) );
 
                     $post = get_page_by_title( $schema_name, 'OBJECT', 'schema' );
-                    $post_exists = ($post!=NULL) && property_exists( $post, 'ID' );
+                    $post_exists = ( $post != NULL ) && property_exists( $post, 'ID' );
+
+                    $data_fields = json_decode( $file_content );
+                    if ( is_array( $data_fields ) && array_key_exists('description', $data_fields ) ){
+                        $description = $data_fields['description'];
+                    }
 
                     if ( $post_exists ){
                         $post_id = $post->ID;
                         $this->addSchemaData( $post_id, 'sample_data', array(
+                            'version' => $version_name,
+                            'file_name' => $file_name,
+                            'description' => $description,
                             'version' => $version_name,
                             'sample_data_json'=>$file_content,
                             'title' => $sample_data_title,
@@ -275,7 +283,7 @@ class SchemaLibrary {
             $existing_versions = get_field( 'sample_data', $post_id );
 
             if( $existing_versions && count( $existing_versions ) > 0 ){
-                $this->copyExistingFieldsByKeyField( $existing_versions, $new_data_for_post, 'visibility', 'title' );
+                $this->copyExistingFieldsByKeyField( $existing_versions, $new_data_for_post, 'visibility', 'file_name' );
             }
 
             $field_key = $this->acf_get_field_key( $post_id, '%sample_data%' );

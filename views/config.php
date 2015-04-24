@@ -4,7 +4,8 @@
 <br/>
 
 <h2>Library Management</h2>
-<button  class="button button-primary update-button" data-url="<?php echo remove_qsvar( $data['plugin_full_url'], 'updateLibrary' ) ?>&updateLibrary=true" >Update Library</button>
+
+<a  class="button button-primary update-button" href="http://<?php echo remove_qsvar( $data['plugin_full_url'], 'updateLibrary' ) . "&updateLibrary=true"; ?>">Update Library</a>
 
 <?php if ( array_key_exists('update_output', $data) ): ?>
 <div class="update-output">

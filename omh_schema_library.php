@@ -102,7 +102,7 @@ function omh_schema_library_init(){
 
 }
 
-load_resources();
+add_action('wp_enqueue_scripts', 'load_resources');
 add_action('admin_menu', 'omh_schema_library_setup_menu');
 
 ?>
