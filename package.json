@@ -1,0 +1,16 @@
+{
+  "name": "omh_schema_library",
+  "version": "0.1.0",
+  "description": "A Wordpress plugin for documenting schemas ",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Open mHealth",
+  "license": "Apache-2.0"
+}

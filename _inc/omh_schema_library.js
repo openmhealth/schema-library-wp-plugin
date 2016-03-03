@@ -4,18 +4,23 @@
 
 jQuery( function ( $ ) {
 
-  $('.update-button').on( 'click', function() {
-
-    // $.get( $( this ).data('url'), function( data ) {
-    //   $( '.result' ).html( data );
-    // });
-
-    console.log( $( this ).data('url') );
+  $('.update-button').on('click', function() {
 
     window.location = "//" + $( this ).data('url');
 
-
   });
+
+  var disableForm = function() {
+
+    $('.update-button').attr('disabled', true);
+    $('.update-button').off();
+    $('.update-button').attr('href','#');
+    $('.update-button-disable-message').show();
+
+  };
+
+  $('*[data-behavior="disable-update"]').on('change', disableForm);
+  $('*[data-behavior="disable-update"]').on('keyup', disableForm);
 
 });
 

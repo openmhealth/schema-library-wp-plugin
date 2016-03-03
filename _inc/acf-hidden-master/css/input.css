@@ -1,0 +1,5 @@
+div[data-field_type='hidden'],
+div[data-type='hidden']
+{
+	display:none;
+}

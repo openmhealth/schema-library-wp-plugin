@@ -2,20 +2,29 @@
 
 class AdminOptions {
 
+  //options available for configuring the plugin behavior
   private $options = array(
     'git_repository' => '',
     'base_dir' => '',
     'sample_data_dir' => '',
     'git_branch' => '',
     'schema_host_url' => '',
+    'default_author' => '',
+    'default_author_url' => '',
     'git_enabled' => false,
+    'replace_all_authors' => false,
+    'update_output' => '',
+    'replace_all_contributors' => false,
   );
 
   private $optionsLoaded = false;
 
   private $pluginOptionKey = 'options_omh_schema_library';
-  private static $pluginDataOptionKey = 'options_omh_schema_library_data';
 
+  /**
+  * Get the stored options
+  * @return
+  */
   public function get(){
 
     if( !$this->optionsLoaded ){
@@ -26,6 +35,9 @@ class AdminOptions {
 
   }
 
+  /**
+  * Load the stored options
+  */
   public function load(){
 
     $omh_options = get_option( $this->pluginOptionKey );
@@ -41,6 +53,9 @@ class AdminOptions {
 
   }
 
+  /**
+  * Save options in the database
+  */
   public function save( $newOptions ){
 
     foreach( $this->options as $name => $value ){
@@ -53,12 +68,4 @@ class AdminOptions {
 
   }
  
-  public static function saveSchemaData( $data ){
-    update_option( AdminOptions::$pluginDataOptionKey, $data );
-  }
-
-  public static function getSchemaData(){
-    return get_option( AdminOptions::$pluginDataOptionKey );
-  }
-
 }
