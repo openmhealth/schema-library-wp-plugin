@@ -1,4 +1,13 @@
-<?php namespace OMHSchemaLibrary; ?>
+<?php
+/**
+*
+* View for the wp admin config section
+*
+*
+**/
+namespace OMHSchemaLibrary;
+?>
+
 <h2>Configuration Options</h2>
 
 <?php view('options', $data ); ?>

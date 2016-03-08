@@ -1,3 +1,12 @@
+<?php
+/**
+*
+* View for the bread crumbs that help navigate from the schema view
+* Includes the dropdown that allows users to select the visible version 
+*
+*
+**/
+?>
 <!-- schema header -->
 <header class="navbar navbar-default navbar-static schema-library-nav" role="banner">
   <div class="navbar-header">

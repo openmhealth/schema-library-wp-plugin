@@ -1,4 +1,12 @@
-<?php namespace OMHSchemaLibrary;
+<?php
+/**
+*
+* Class representing the options that are set when configuring the library in the wp admin
+*
+*
+*/
+
+namespace OMHSchemaLibrary;
 
 class AdminOptions {
 
@@ -55,6 +63,7 @@ class AdminOptions {
 
   /**
   * Save options in the database
+  * @param new options to save
   */
   public function save( $newOptions ){
 

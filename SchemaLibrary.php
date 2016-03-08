@@ -51,7 +51,6 @@ class SchemaLibrary {
             'rewrite' => array('slug' => 'schemas')
         );
         register_post_type( 'schema' , $args );
-
     }
 
     /**
@@ -600,81 +599,4 @@ class SchemaLibrary {
 
 }
 
-
-
-    //pull in contributors for this file
-
-    // exec("cd " . $schema_dir . "; git config --get remote.origin.url", $git_repo_url );
-
-    // $git_repo_url = $git_repo_url[0];
-
-    // preg_match('/https:\/\/[^\/]+\/(.+).git/', $git_repo_url, $matches );
-    // $git_path = $matches[1];
-
-    // $trim_count = strlen( $schema_dir ) + 1;
-
-    // $filepath_in_repo = substr( $name, $trim_count );
-
-    // $git_data_url = "https://api.github.com/repos/" . $git_path . "/commits?path=" . $filepath_in_repo;
-
-    // echo $git_data_url;
-
-    // $curlSession = curl_init();
-    // $agent = 'openmhealth/schemas';
-
-    // //curl_setopt($curlSession, CURLOPT_USERPWD, $);
-    // curl_setopt($curlSession, CURLOPT_USERAGENT, $agent);
-    // curl_setopt($curlSession, CURLOPT_URL, $git_data_url);
-    // curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
-    // curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
-
-    // $jsonData = curl_exec($curlSession);
-    // curl_close($curlSession);
-    // var_dump(json_decode($jsonData));
-
-
-    //update_field('schema_json', $file_content, $post_id );
-    //update_field('schema_json', [ 'schema_json' => $file_content, 'version' => '1.0', 'visible' => 0 ], $post_id );
-
-    // if (true){
-
-    //     $update_output['update_result'] .= "Replacing images in contributors\n";
-    //     $field_key = $this->acf_get_field_key( $post_id, '%contributors%' );
-    //     $contrib_field = get_field( $field_key, $post_id );
-
-    //     foreach ($contrib_field as $index => $value) {
-    //         if( $value['name'] == 'Ida Sim' ){ // 
-    //             $update_output['update_result'] .= 'Replacing Ida Sim image';
-    //             $contrib_field[ $index ]['image_url'] = 'http://www.openmhealth.org/app/uploads/2015/08/idasim.jpg';
-    //         }
-    //         if( $value['name'] == 'Simona Carini' ){ // 
-    //             $update_output['update_result'] .= 'Replacing Simona Carini image';
-    //             $contrib_field[ $index ]['image_url'] = 'http://www.openmhealth.org/app/uploads/2015/08/Simona1.jpg';
-    //         }
-    //     }
-
-    //     //$update_output['update_result'] .= var_export($contrib_field,true);
-    //     update_field( $field_key, $contrib_field, $post_id );
-
-    //     // $default_contributors = array(
-    //     //     array(
-    //     //         "name" => "Emerson Farrugia",
-    //     //         "url" => "https://github.com/emersonf",
-    //     //         "image_url" => "https://avatars0.githubusercontent.com/u/834831?v=3&s=460"
-    //     //     ),
-    //     //     array(
-    //     //         "name" => "Ida Sim",
-    //     //         "url" => "/organization/about",
-    //     //         "image_url" => "http://www.openmhealth.org/openmhealth2013/wp-content/uploads/2013/05/idasim.jpg"
-    //     //     ),
-    //     //     array(
-    //     //         "name" => "Simona Carini",
-    //     //         "url" => "/organization/about",
-    //     //         "image_url" => "http://www.openmhealth.org/openmhealth2013/wp-content/uploads/2013/05/Simona1.jpg"
-    //     //     ),
-    //     // );
-    //     // update_field( $field_key, $default_contributors, $post_id );
-    //     // 
-
-    // }
 ?>

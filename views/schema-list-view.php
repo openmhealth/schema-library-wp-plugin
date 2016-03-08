@@ -1,3 +1,15 @@
+<?php
+/**
+*
+* View for a list of schemas
+*
+* Uses built-in wordpress template variables wherever
+* content is not interactive and angular template variables
+* otherwise. This makes site easier to crawl without javascript.
+*
+*/
+
+?>
 
 <div ng-controller="SchemaLibraryView">
 
@@ -11,7 +23,7 @@
       <div class="loading-search" ng-show="loadingSearch">
           <h3>Loading search results...</h3>
           <div class="text-center">
-              <img src="<?= esc_url(bloginfo('template_directory')); ?>/css/images/spinner_small1.gif">
+              <img ng-src="{{getAssetURL('spinner-small')}}">
           </div>
       </div>
 
@@ -25,7 +37,7 @@
         $link_type = $multi? 'schema-type' : 'schema';
         ?>
         <li class="list-group-item id-<?=$data['slug']?>">
-          <a href="<?php echo $data['url'] ?>">
+          <a href="<?php echo $data['url'] ?>" library-link="schema">
             <h3>
               <?php echo $data['name'] ?>
               <?php if ( $multi ) {

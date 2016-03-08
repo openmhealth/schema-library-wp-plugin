@@ -1,3 +1,12 @@
+<?php
+/**
+*
+* View for the options in the wp admin config section
+*
+*
+**/
+?>
+
 <div class="options">
 
   <form method="get" action="http://<?php echo strtok( $data['plugin_full_url'], '?'); ?>">

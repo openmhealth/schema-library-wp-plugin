@@ -7,7 +7,7 @@
 Plugin Name: OMH Schema Library
 Plugin URI: http://openmhealth.org/
 Description: Pulls in the git repo of schemas and adds custom posts for every schema.
-Author: Jasper Speicher
+Author: Open mHealth
 Version: 0.1
 Author URI: http://openmhealth.org/
 */
@@ -20,6 +20,8 @@ define( 'OMH_SCHEMA_LIBRARY__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'OMH_SCHEMA_LIBRARY__PLUGIN_PAGE_NAME', 'omh-schema-library-plugin');
 
 define( "SCHEMA_URL_PATH", "/schemas/"); //url where schema docs are found by web browser
+
+define( "SHOW_CATEGORIES", false ); // in a later release this may become a configuration parameter
 
 require_once( OMH_SCHEMA_LIBRARY__PLUGIN_DIR . "SchemaLibrary.php");
 require_once( OMH_SCHEMA_LIBRARY__PLUGIN_DIR . "AdminOptions.php");
@@ -223,29 +225,31 @@ function convertSchemaIDtoHyperlink( $schema_id ){
 */
 function schema_list_view( $shortcode_attributes ){
 
-    //list terms in a given taxonomy
-    // $taxonomy = 'schema_type';
-    // $tax_terms = get_terms($taxonomy);
 
     $schema_data = array();
     $schemas_added = array();
 
-    // foreach ($tax_terms as $tax_term) {
-    //   $data = array();
-    //   $data['url'] = esc_attr( home_url() . get_term_link( $tax_term, $taxonomy ) );
-    //   $data['name'] = $tax_term->name;
-    //   $args = array(
-    //       'post_type' => 'schema',
-    //       'schema_type' => $tax_term->slug,
-    //       'posts_per_page'=>-1
-    //   );
-    //   $query = new WP_Query( $args );
-    //   $data['count'] = count( $query->posts );
-    //   $schema_data[] = $data;
-    //   foreach ( $query->posts as $schema ) {
-    //     $schemas_added[] = $schema->ID;
-    //   }
-    // }
+    //list terms in a given taxonomy
+    if ( SHOW_CATEGORIES ){
+        $taxonomy = 'schema_type';
+        $tax_terms = get_terms($taxonomy);
+        foreach ($tax_terms as $tax_term) {
+          $data = array();
+          $data['url'] = esc_attr( home_url() . get_term_link( $tax_term, $taxonomy ) );
+          $data['name'] = $tax_term->name;
+          $args = array(
+              'post_type' => 'schema',
+              'schema_type' => $tax_term->slug,
+              'posts_per_page'=>-1
+          );
+          $query = new WP_Query( $args );
+          $data['count'] = count( $query->posts );
+          $schema_data[] = $data;
+          foreach ( $query->posts as $schema ) {
+            $schemas_added[] = $schema->ID;
+          }
+        }
+    }
 
     $args = array(
         'post_type' => 'schema',

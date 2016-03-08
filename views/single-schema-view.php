@@ -8,7 +8,7 @@
 * content is not interactive and angular template variables
 * otherwise. This makes site easier to crawl without javascript.
 *
-**/
+*/
 
 ?>
 
@@ -59,7 +59,7 @@
     <div class="loading-schema" ng-if="!selectedVersion">
         <h3>{{ loadingMessage }}</h3>
         <div class="text-center" ng-show="visibleVersions.length>0">
-            <img src="<?= esc_url(bloginfo('template_directory')); ?>/css/images/spinner_small1.gif">
+            <img ng-src="{{getAssetURL('spinner-small')}}">
         </div>
     </div>
     
