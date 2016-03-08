@@ -1,4 +1,6 @@
 .idea
+schemas/*
+!schemas/README.md
 
 # Created by https://www.gitignore.io/api/intellij
 
