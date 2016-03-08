@@ -1,16 +1,29 @@
 <?php
 /**
-*
-* Class representing the options that are set when configuring the library in the wp admin
-*
-*
-*/
+ * Copyright 2016 Open mHealth
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Class representing the options that are set when configuring the library in the WordPress admin.
+ */
 
 namespace OMHSchemaLibrary;
 
 class AdminOptions {
 
-  //options available for configuring the plugin behavior
+  // options available for configuring the plugin behavior
   private $options = array(
     'git_repository' => '',
     'base_dir' => '',
@@ -31,7 +44,7 @@ class AdminOptions {
 
   /**
   * Get the stored options
-  * @return
+  * @return the stored options
   */
   public function get(){
 
@@ -40,7 +53,6 @@ class AdminOptions {
     }
 
     return $this->options;
-
   }
 
   /**
@@ -58,7 +70,6 @@ class AdminOptions {
     }
 
     $this->optionsLoaded = true;
-
   }
 
   /**
@@ -74,7 +85,5 @@ class AdminOptions {
     }
 
     update_option( $this->pluginOptionKey, $this->options );
-
   }
- 
 }

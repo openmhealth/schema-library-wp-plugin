@@ -1,4 +1,23 @@
-<?php namespace OMHSchemaLibrary;
+<?php
+/**
+ * Copyright 2016 Open mHealth
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace OMHSchemaLibrary;
+
+
 /**
  * @package OMH_Schema_Library
  * @version 0.1
@@ -13,7 +32,7 @@ Author URI: http://openmhealth.org/
 */
 
 define( 'OMH_SCHEMA_LIBRARY_VERSION', '0.1' );
-define( 'USE_INCLUDED_ACF', false ); //can optionally store acf code in this plugin directory
+define( 'USE_INCLUDED_ACF', false ); //can optionally store ACF code in this plugin directory
 
 define( 'OMH_SCHEMA_LIBRARY__PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'OMH_SCHEMA_LIBRARY__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
