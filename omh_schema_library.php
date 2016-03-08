@@ -382,11 +382,13 @@ function activate_acf(){
         include_once( '_inc/acf-hidden-master/acf-hidden.php' );
     }
 
-    include "_inc/acf_fields.php";
+    if ( is_plugin_active('advanced-custom-fields-pro/acf.php') ){
+        include "_inc/acf_fields.php";
 
-    SchemaLibrary::$field_definitions = get_acf_fields();
+        SchemaLibrary::$field_definitions = get_acf_fields();
 
-    \acf_add_local_field_group( SchemaLibrary::$field_definitions );
+        \acf_add_local_field_group( SchemaLibrary::$field_definitions );
+    }
 
 }
 
