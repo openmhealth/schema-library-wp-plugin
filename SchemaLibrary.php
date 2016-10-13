@@ -333,8 +333,10 @@ class SchemaLibrary {
                 if ( !array_key_exists( strval($post_id), $old_versions_by_name ) ){
                     $old_versions_by_name[ strval($post_id) ] = [];
                     $old_versions = get_field('schema_versions', $post_id );
-                    foreach ( $old_versions as $old_version ) {
-                        $old_versions_by_name[ strval($post_id) ][ $old_version['version'] ] = $old_version;
+                    if ( is_array($old_versions) ){
+                        foreach ( $old_versions as $old_version ) {
+                            $old_versions_by_name[ strval($post_id) ][ $old_version['version'] ] = $old_version;
+                        }
                     }
                 }
                 if( !array_key_exists( $version_name, $old_versions_by_name[ strval($post_id) ] ) ){
@@ -439,15 +441,19 @@ class SchemaLibrary {
             $schema_name = get_the_title( $post_id );
             $post_edit_url = get_edit_post_link( $post_id, '' );
 
-            foreach( $new_data_for_post as $index => $new_data_item ){
-                $item_exists = false;
-                foreach( $existing_versions as $index => $existing_item ){
-                    if ( $existing_item['file_name'] == $new_data_item['file_name'] && $existing_item['version'] == $new_data_item['version'] ){
-                        $item_exists = true;
+            if( is_array($new_data_for_post) ){
+                foreach( $new_data_for_post as $index => $new_data_item ){
+                    $item_exists = false;
+                    if( is_array($existing_versions) ){
+                        foreach( $existing_versions as $index => $existing_item ){
+                            if ( $existing_item['file_name'] == $new_data_item['file_name'] && $existing_item['version'] == $new_data_item['version'] ){
+                                $item_exists = true;
+                            }
+                        }
                     }
-                }
-                if ( !$item_exists ){
-                    $update_output['update_result'] .= "Sample data '" . $new_data_item['file_name'] . "' added to '" . $schema_name . ".' To make it visible, <a href='" . $post_edit_url . "'>edit</a> the schema.\n";
+                    if ( !$item_exists ){
+                        $update_output['update_result'] .= "Sample data '" . $new_data_item['file_name'] . "' added to '" . $schema_name . ".' To make it visible, <a href='" . $post_edit_url . "'>edit</a> the schema.\n";
+                    }
                 }
             }
 
