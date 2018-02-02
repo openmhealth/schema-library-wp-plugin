@@ -1,6 +1,6 @@
-#Schema Library Wordpress Plugin
+# Schema Library Wordpress Plugin
 
-##What it does
+## What it does
 
 The Open mHealth Schema Library Wordpress plugin generates online documentation for the JSON schemas and sample data contained in a Git repository.
 
@@ -9,7 +9,7 @@ When updated through the Wordpress admin panel, it pulls in each schema, includi
 With each subsequent update, any new schemas found in the repository are added to the library in Wordpress, while existing schemas descriptions and metadata are preserved.
 
 
-##How to install and test the standalone library
+## How to install and test the standalone library
 
 *By hand, in this order:*
 
@@ -26,7 +26,7 @@ With each subsequent update, any new schemas found in the repository are added t
 
 (coming soon)
 
-##Configuration
+## Configuration
 1. Click the “Schema Library” tab near the bottom of the admin panel’s left navigation
 2. Enter the appropriate settings for your organization
 3. Click “Save Changes”
@@ -37,7 +37,7 @@ With each subsequent update, any new schemas found in the repository are added t
 8. Make schema versions visible, as appropriate
 9. Click “Publish” in the upper right corner of the editing page
 
-##How to integrate the Schema Library into your project
+## How to integrate the Schema Library into your project
 
 *If you want to have a dedicated website:*
 * Install the website
